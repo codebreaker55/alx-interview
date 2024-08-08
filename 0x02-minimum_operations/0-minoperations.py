@@ -17,21 +17,22 @@ def minOperations(n):
     if (n < 2):
         return 0
 
-    oper = 0
-    divisor = 1
+    tot_opers = 0
+    curr_chars = 1
     count = 0
 
-    # Continue while n is greater than divisor
-    while (n > divisor):
-        remain = n - divisor
-        if (remain % divisor == 0):
-            # If so, repeatedly divide remainder by the divisor
-            # and add the divisor to operations
-            oper = divisor
-            divisor = divisor + oper
+    # Continue while n is greater than current characters
+    while (n > curr_chars):
+        remain = n - curr_chars
+        if (remain % curr_chars == 0):
+            # If so, repeatedly divide remainder by the current characters
+            # and add the curr_chaars to the total operations
+            tot_opers = curr_chars
+            curr_chars = curr_chars + tot_opers
             count = count + 2
         else:
-            divisor = divisor + oper
+            # Otherwise, just add the current characters to the operations
+            curr_chars = curr_chars + tot_opers
             count = count + 1
 
     return count
