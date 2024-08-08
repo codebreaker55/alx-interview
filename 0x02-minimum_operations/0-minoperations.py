@@ -25,7 +25,7 @@ def minOperations(n):
              # If so, repeatedly divide n by the divisor and add the divisor to operations
             while (n % divisor == 0):
                 oper = oper + divisor
-                n = n // divisor
+                n = n / divisor
             # move to the next potential divisor
             divisor = divisor + 1
 
