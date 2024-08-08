@@ -18,17 +18,20 @@ def minOperations(n):
         return 0
 
     oper = 0
-    divisor = 2
+    divisor = 1
+    count = 0
 
-    # Continue while n is greater than 1
-    while (n > 1):
-        if (n % divisor == 0):
-            # If so, repeatedly divide n by the divisor
+    # Continue while n is greater than divisor
+    while (n > divisor):
+        remain = n - divisor
+        if (remain % divisor == 0):
+            # If so, repeatedly divide remainder by the divisor
             # and add the divisor to operations
-            while (n % divisor == 0):
-                oper = oper + divisor
-                n = n / divisor
-            # move to the next potential divisor
-            divisor = divisor + 1
+            oper = divisor
+            divisor = divisor + oper
+            count = count + 2
+        else:
+            divisor = divisor + oper
+            count = count + 1
 
-    return oper
+    return count
