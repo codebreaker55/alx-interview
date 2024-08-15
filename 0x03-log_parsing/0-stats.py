@@ -5,14 +5,7 @@
 import sys
 
 
-if __name__ == '__main__':
-    f_size, count = 0, 0
-    stat_codes = ["200", "301", "400", "401", "403", "404", "405", "500"]
-    # Create a dictionary to store the count of each status code
-    stats = {s: 0 for s in stat_codes}
-
-
-def stdin_print(stats, f_size):
+def stdin_print(stats: dict, f_size: int):
     """
     Print the status information
     Args:
@@ -21,35 +14,39 @@ def stdin_print(stats, f_size):
         f_size (int): The total size of the file
     """
     print("File size: {:d}".format(f_size))
-    for stat_codes, count in sorted(stats.items()):
-        if count != 0:
-            print("{}: {:d}".format(stat_codes, count))
+    for k in sorted(stats.keys()):
+        if stats[k]:
+            print("{}: {:d}".format(k, stats[k]))
 
+
+f_size, count = 0, 0
+
+stat_codes = {"200": 0, "301": 0, "400": 0, "401": 0,
+              "403": 0, "404": 0, "405": 0, "500": 0}
 
 try:
     # Process input from stdin
-    for line in sys.stdin:
-        # Print status every 10 lines
-        if count != 0 and count % 10 == 0:
-            stdin_print(stats, f_size)
+    for st_line in sys.stdin:
+        if count % 10 == 0 and count != 0:
+            stdin_print(stat_codes, f_size)
 
-        # Split the input line and update the count and file size
-        st_list = line.split()
-        count += 1
+            # Split the input line and update the count and file size
+            st_list = st_line.split()
+            count = count + 1
 
         try:
             f_size += int(st_list[-1])
-        except ValueError:
+        except Exception:
             pass
 
         try:
-            if st_list[-2] in stats:
-                stats[st_list[-2]] += 1
-        except IndexError:
+            if st_list[-2] in stat_codes:
+                stat_codes[st_list[-2]] += 1
+        except Exception:
             pass
-    stdin_print(stats, f_size)
+    stdin_print(stats_codes, f_size)
 
 
 except KeyboardInterrupt:
-    stdin_print(stats, f_size)
+    stdin_print(stat_codes, f_size)
     raise
