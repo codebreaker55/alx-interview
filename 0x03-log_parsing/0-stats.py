@@ -30,21 +30,21 @@ try:
         if count % 10 == 0 and count != 0:
             stdin_print(stat_codes, f_size)
 
-            # Split the input line and update the count and file size
-            st_list = st_line.split()
-            count = count + 1
+        # Split the input line and update the count and file size
+        st_list = st_line.split()
+        count = count + 1
 
         try:
             f_size += int(st_list[-1])
-        except Exception:
+        except ValueError:
             pass
 
         try:
             if st_list[-2] in stat_codes:
                 stat_codes[st_list[-2]] += 1
-        except Exception:
+        except IndexError:
             pass
-    stdin_print(stats_codes, f_size)
+    stdin_print(stat_codes, f_size)
 
 
 except KeyboardInterrupt:
