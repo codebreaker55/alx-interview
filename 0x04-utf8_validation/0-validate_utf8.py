@@ -17,8 +17,8 @@ def validUTF8(data):
     mask_1 = 1 << 7
     mask_2 = 1 << 6
 
+    # get binary representation, only need the least significant 8 bits
     for byt in data:
-    # get the binary representation, only need the least significant 8 bits
 
         mask_byte = 1 << 7
 
@@ -32,7 +32,7 @@ def validUTF8(data):
                 continue
 
             if number_bytes == 1 or number_bytes > 4:
-                        return False
+                return False
 
         else:
             if not (byt & mask_1 and not (byt & mask_2)):
