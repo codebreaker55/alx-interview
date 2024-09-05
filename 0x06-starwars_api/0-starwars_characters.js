@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-const req = require('request'); // Using req as the alias for request
+const req = require('request'); // using req as the alias for request
 const movieId = process.argv[2];
 const urlApi = `https://swapi-api.hbtn.io/api/films/${movieId}`;
 
