@@ -10,12 +10,19 @@ def island_perimeter(grid):
     of the island described in grid
     """
     perimeter = 0
-    for n in range(len(grid)):
-        for m in range(len(grid[n])):
-            if grid[n][m] == 1:
-                perimeter += 4
-                if m > 0 and grid[n-1][m] == 1:
-                    perimeter -= 2
-                if m > 0 and grid[n][m-1] == 1:
-                    perimeter -= 2
+    if type(grid) != list:
+        return 0
+    n = len(grid)
+    for j, row in enumerate(grid):
+        m = len(row)
+        for k, cell in enumerate(row):
+            if cell == 0:
+                continue
+            edges = (
+                j == 0 or (len(grid[j - 1]) > k and grid[j - 1][k] == 0),
+                k == m - 1 or (m > k + 1 and row[k + 1] == 0),
+                j == n - 1 or (len(grid[j + 1]) > k and grid[j + 1][k] == 0),
+                k == 0 or row[k - 1] == 0,
+            )
+            perimeter += sum(edges)
     return perimeter
